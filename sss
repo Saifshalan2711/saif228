@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp3
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int minNumber, maxNumber;
+
+            Console.Write("Enter minNumber: ");
+            minNumber = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter maxNumber: ");
+            maxNumber = int.Parse(Console.ReadLine());
+
+            Random random = new Random();
+            int[] numbers = new int[1000];
+
+            
+            for (int i = 0; i < 1000; i++)
+            {
+                numbers[i] = random.Next(minNumber, maxNumber + 1);
+            }
+
+            Dictionary<int, int> frequencyDict = new Dictionary<int, int>();
+
+            foreach (int number in numbers)
+            {
+                if (frequencyDict.ContainsKey(number))
+                {
+                    frequencyDict[number]++;
+                }
+                else
+                {
+                    frequencyDict[number] = 1;
+                }
+            }
+
+            try
+            {
+                
+                Console.WriteLine("Number Frequencies:");
+                foreach (var entry in frequencyDict)
+                {
+                    Console.WriteLine($"Number {entry.Key} appears {entry.Value} times.");
+                }
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine("Error: Array index is out of bounds.");
+            }
+
+            Console.ReadLine(); 
+        }
+    }
+}
